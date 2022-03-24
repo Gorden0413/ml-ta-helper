@@ -12,7 +12,7 @@ No extra packages needed.
 
 ## Installation
 ```
-git clone https://github.com/cyhuang-tw/ml-ta-helper.git
+git clone https://github.com/Gorden0413/ml-ta-helper.git
 ```
 
 ## Usage
