@@ -5,7 +5,7 @@ cheat=hw1_cheat.txt
 
 python3 collect_score.py \
     --public hw1_public.csv \
-    --private hw1_private.txt \
+    --private hw1_private.csv \
     --students ../ML2021_students.csv \
     --publ-bl 2.03004 1.28359 0.88017 \
     --priv-bl 2.04826 1.36937 0.89266 \

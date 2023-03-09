@@ -29,7 +29,7 @@ git clone https://github.com/Gorden0413/ml-ta-helper.git
 ```
 python3 collect_score.py \
     --public <public leaderboard>.csv \
-    --private <private leaderboard>.html \
+    --private <private leaderboard>.csv \
     --students <student list>.csv \
     --publ-bl <public baselines (from easy to hard)> \
     --priv-bl <private baselines (from easy to hard)> \
