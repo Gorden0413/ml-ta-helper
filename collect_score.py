@@ -70,34 +70,29 @@ def read_public(path):
 
 
 def read_private(path, data, contestants):
-    ''' Parse public leaderboard's .txt/.html file '''
+    ''' Parse private leaderboard's .csv file '''
     with open(path, 'r') as fp:
-        start = False
-        prev_name = ''
-        cnt = 0
-        for line in fp:
-            if cnt == contestants:
-                break
-            line = line.strip()
-            if line[:6] == '#\t△pub':
-                start = True
+        rows = csv.reader(fp)
+        students, repeat, invalid, ascending, prev_score = 0, 0, 0, -1, -1
+        repeat_id = []
+        for i, row in enumerate(rows):
+            if i == 0:
                 continue
-            elif not start or line == '':
+            name = get_student_id(row[1])
+            if name == '':
+                invalid += 1
                 continue
+            score = float(row[3])
 
-            if line[0].isdigit():
-                cnt += 1
-                team_name = normalize_team_name(line.split('\t')[2])
-                name = get_student_id(team_name)
-                prev_name = name
-                if name == '' or data[name]['team_name'] != team_name:
-                    prev_name = ''
-                    if name != '' and data[name]['team_name'] != team_name:
-                        print(data[name]['team_name'] + '\n' + team_name)
-                    continue
-                data[name]['private_score'] = 0.0
-            elif line[0] == '<' and prev_name != '':
-                data[name]['private_score'] = float(line.split('\t')[1])
+            data[name]['private_score'] = score
+            students += 1
+
+            if type(ascending) is int:
+                if prev_score != -1 and score != prev_score:
+                    ascending = score > prev_score
+                else:
+                    prev_score = score
+
         return data
 
 
